@@ -38,11 +38,23 @@ class Song
   def self.find_or_create_by_name(name)
     result = self.find_by_name(name)
     if result
-      result
     else
       self.create_by_name(name)
     end
+    binding.p
   end
+
+
+  def self.find_or_create_by_name2(title)
+  #either return a matching song instance with that name or create a new song with the name and return the song instance
+  result = self.find_by_name(title)
+  if result
+    result
+  else
+    self.create_by_name(title)
+  end
+  binding.pry
+end
 
   def self.alphabetical
      self.all.sort_by{|song| song.name}
@@ -57,14 +69,6 @@ class Song
     song
   end
 
-  def self.create_from_filename(filename)
-    result = self.new_from_filename(filename)
-    song = self.create
-    song.name = result.name
-    song.artist_name = result.artist_name
-    song
-  end
-
   def self.artist_name(artist_name)
     @artist_name = artist_name
   end
@@ -75,3 +79,7 @@ class Song
   end
 
 end
+
+Song.find_or_create_by_name2("John")
+Song.find_or_create_by_name2("Stuart")
+Song.find_or_create_by_name2("John")
